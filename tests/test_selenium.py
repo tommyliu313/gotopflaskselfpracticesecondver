@@ -15,7 +15,7 @@ class SeleniumTestCase(unittest.TestCase):
         #如果瀏覽器無法啟動，就跳過這些測試
         if cls.client:
             #建立app
-            cls.app = create+app('testing')
+            cls.app = create + app('testing')
             cls.app_context = cls.app.app_context()
             cls.app_context.push()
             #禁止記錄，來讓unittest有簡明的輸出

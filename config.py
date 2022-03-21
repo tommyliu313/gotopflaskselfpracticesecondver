@@ -1,10 +1,6 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-class TestingConfig(Config):
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URI') or 'sqlite://'
-    WTF_CSRF_ENABLED = False
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
@@ -25,6 +21,11 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or  'sqlite:///' + os.path.join(basedir,'data-dev.sqlite')
+
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URI') or 'sqlite://'
+    WTF_CSRF_ENABLED = False
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or  'sqlite:///' + os.path.join(basedir,'data.sqlite')
@@ -49,10 +50,10 @@ class ProductionConfig(Config):
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
 config = {
-    'development' : DevelopmentConfig,
-    'testing' : TestingConfig,
-    'production' : ProductionConfig,
-    'default' : DevelopmentConfig
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'production': ProductionConfig,
+    'default': DevelopmentConfig
 }
 
 

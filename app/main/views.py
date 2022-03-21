@@ -52,7 +52,9 @@ def post(id):
 @permission_required(Permission.MODERATE)
 def moderate():
     page = request.args.get('page',1,type=int)
-    pagination = Comment.query.order
+    pagination = Comment.query.order(Comment.timestamp.desc()).paginate(page,per_page=current_app.config['FLASKY_COMMENT_PER_PAGE'],error_out=False)
+    comments = pagination.items
+    return render_template('moderate.html',comments=comments,pagination=pagination,page=page)
 
 
 

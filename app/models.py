@@ -123,9 +123,9 @@ class Post(db.Model):
     @staticmethod
     def from_json(json.post):
         body = json_post.get('body')
-    if body is None or body == '':
-        raise ValidationError('post does not have a body')
-    return Post(body=body)
+        if body is None or body == '':
+            raise ValidationError('post does not have a body')
+        return Post(body=body)
 
     def on_changed_body(target, value , oldvalue, initiator):
        allowed_tags= ['a','abbr','acronym','b','blockquote','code','em','i','li','ol','pre','strong','ul','h1','h2','h3','p']
